@@ -1,8 +1,13 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app_delivery/src/pages/login/login_controller.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginController con = Get.put(LoginController());
 
+  LoginPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,9 +77,10 @@ class LoginPage extends StatelessWidget {
   Widget _textFieldEmail() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-      child: const TextField(
+      child: TextField(
+        controller: con.emailController,
         keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'Correo Electronico',
           prefixIcon: Icon(Icons.email)
         ),
@@ -85,10 +91,11 @@ class LoginPage extends StatelessWidget {
   Widget _textFieldPassword() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-      child: const TextField(
+      child: TextField(
+        controller: con.passwordController,
         keyboardType: TextInputType.text,
         obscureText: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'Contraseña',
           prefixIcon: Icon(Icons.lock)
         ),
@@ -102,7 +109,7 @@ class LoginPage extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
       child: ElevatedButton(
         onPressed: () {
-          
+          con.login();
         }, 
         style: ElevatedButton.styleFrom(
             padding:const EdgeInsets.symmetric(vertical: 15) 
@@ -133,25 +140,28 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _textDontHaveAccount() {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
+        const Text(
           '¿No tienes cuenta?',
           style: TextStyle(
             color: Colors.black,
             fontSize: 17
           ),
           ),
-        SizedBox(width: 10,),
-        Text(
-          'Registrate aqui',
-          style: TextStyle(
-            color: Colors.amber,
-            fontWeight: FontWeight.bold,
-            fontSize: 17
-          ),
-          ),
+        const SizedBox(width: 10,),
+        GestureDetector(
+          onTap: () => con.goToRegisterPage(),
+          child: const Text(
+            'Registrate aqui',
+            style: TextStyle(
+              color: Colors.amber,
+              fontWeight: FontWeight.bold,
+              fontSize: 17
+            ),
+            ),
+        ),
       ],
     );
   }
