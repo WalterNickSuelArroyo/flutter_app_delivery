@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_delivery/src/models/user.dart';
+import 'package:flutter_app_delivery/src/pages/home/home_page.dart';
 import 'package:flutter_app_delivery/src/pages/login/login_page.dart';
 import 'package:flutter_app_delivery/src/pages/register/register_page.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+User userSession = User.fromJson(GetStorage().read('user') ?? {});
+
+void main() async{
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -27,10 +33,11 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       title: 'Delivery Udemy',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: userSession.id != null ? '/home' : '/',
       getPages: [
         GetPage(name: '/', page: () => LoginPage(),),
         GetPage(name: '/register', page: () => RegisterPage(),),
+        GetPage(name: '/home', page: () => HomePage(),)
       ],
       theme: ThemeData(
         primaryColor: Colors.amber,

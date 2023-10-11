@@ -5,24 +5,24 @@ ResponseApi responseApiFromJson(String str) => ResponseApi.fromJson(json.decode(
 String responseApiToJson(ResponseApi data) => json.encode(data.toJson());
 
 class ResponseApi {
-    bool? sucess;
+    bool? success;
     String? message;
     dynamic data;
 
     ResponseApi({
-        this.sucess,
+        this.success,
         this.message,
         this.data
     });
 
     factory ResponseApi.fromJson(Map<String, dynamic> json) => ResponseApi(
-        sucess: json["sucess"],
+        success: json["success"],
         message: json["message"],
         data: json["data"],
     );
 
     Map<String, dynamic> toJson() => {
-        "sucess": sucess,
+        "success": success,
         "message": message,
         "data": data,
     };
