@@ -7,9 +7,16 @@ class HomePage extends StatelessWidget {
   HomeController con = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('HOME PAGE'),
+        child: ElevatedButton(
+          onPressed: () => con.signOut(), 
+          child: const Text(
+            'Cerrar sesion',
+            style: TextStyle(
+              color: Colors.black
+            ),
+            ))
       ),
     );
   }

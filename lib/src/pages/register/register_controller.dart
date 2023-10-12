@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app_delivery/src/models/user.dart';
 import 'package:flutter_app_delivery/src/provider/users_provider.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -12,6 +15,9 @@ class RegisterController extends GetxController {
   TextEditingController confirmPasswordController = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
+
+  ImagePicker picker = ImagePicker();
+  File? imageFile;
 
   void register() async{
     String email = emailController.text.trim();
@@ -75,5 +81,49 @@ class RegisterController extends GetxController {
         return false;
       }
       return true;
+    }
+    Future selectImage(ImageSource imageSource) async {
+      XFile? image = await picker.pickImage(source: imageSource);
+      if (image != null) {
+        imageFile = File(image.path);
+        update();
+      }
+    }
+
+    void showAlertDialog(BuildContext context) {
+      Widget galleryButton = ElevatedButton(
+        onPressed: () {
+          Get.back();
+          selectImage(ImageSource.gallery);
+        }, 
+        child: const Text(
+          'GALERIA',
+          style: TextStyle(
+            color: Colors.black
+          ),
+        )
+      );
+      Widget cameraButton = ElevatedButton(
+        onPressed: () {
+          Get.back();
+          selectImage(ImageSource.camera);
+        }, 
+        child: const Text(
+          'CAMARA',
+          style: TextStyle(
+            color: Colors.black
+          ),
+        )
+      );
+      AlertDialog alertDialog = AlertDialog(
+        title: Text('Seleccione una opcion'),
+        actions: [
+          galleryButton,
+          cameraButton
+        ],
+      );
+      showDialog(context: context, builder: (BuildContext context) {
+        return alertDialog;
+      },);
     }
 }
