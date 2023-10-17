@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_delivery/src/models/user.dart';
 import 'package:flutter_app_delivery/src/models/response_api.dart';
 import 'package:flutter_app_delivery/src/provider/users_provider.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
 class LoginController extends GetxController {
+
+  User user = User.fromJson(GetStorage().read('user') ?? {});
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   UsersProvider usersProvider = UsersProvider();
@@ -23,7 +26,14 @@ class LoginController extends GetxController {
       print('Response Api: ${responseApi.toJson()}');
       if (responseApi.success == true) {
         GetStorage().write('user', responseApi.data);
-        goToHomePage();
+        User myUser = User.fromJson(GetStorage().read('user') ?? {});
+        print('Roles length: ${myUser.roles!.length}');
+        if (myUser.roles!.length > 1) {
+          goToRolesPage();
+        }
+        else {
+          goToClientProductPage();
+        }
       }
       else {
         Get.snackbar('Login fallido', responseApi.message ?? '');
@@ -32,8 +42,11 @@ class LoginController extends GetxController {
     
   }
 
-  void goToHomePage() {
-    Get.offNamedUntil('/home', (route) => false);
+  void goToClientProductPage() {
+    Get.offNamedUntil('/client/products/list', (route) => false);
+  }
+  void goToRolesPage() {
+    Get.offNamedUntil('/roles', (route) => false);
   }
 
   bool isValidForm(String email, String password) {

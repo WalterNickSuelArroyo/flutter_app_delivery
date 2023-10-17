@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app_delivery/src/models/response_api.dart';
 import 'package:flutter_app_delivery/src/models/user.dart';
@@ -63,7 +62,7 @@ class RegisterController extends GetxController {
     
   }
   void goToHomePage() {
-    Get.offNamedUntil('/home', (route) => false);
+    Get.offNamedUntil('/client/products/list', (route) => false);
   }
   
   bool isValidForm(String email, String name, String lastName, String phone, String password, String confirmPassword) {
