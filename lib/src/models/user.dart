@@ -49,6 +49,6 @@ class User {
         "image": image,
         "password": password,
         "session_token": sessionToken,
-        "roles": roles
+        'roles': roles
     };
 }
