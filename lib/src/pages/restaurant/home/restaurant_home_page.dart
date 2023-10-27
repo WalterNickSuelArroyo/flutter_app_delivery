@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_delivery/src/pages/client/profile/info/client_profile_info_page.dart';
-import 'package:flutter_app_delivery/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
 import 'package:flutter_app_delivery/src/pages/restaurant/categories/create/restaurant_categories_create_page.dart';
 import 'package:flutter_app_delivery/src/pages/restaurant/home/restaurant_home_controller.dart';
 import 'package:flutter_app_delivery/src/pages/restaurant/orders/list/restaurant_orders_list_page.dart';
+import 'package:flutter_app_delivery/src/pages/restaurant/products/create/restaurant_products_create_page.dart';
 import 'package:flutter_app_delivery/src/utils/custom_animated_bottom_bar.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +20,7 @@ class RestaurantHomePage extends StatelessWidget {
         children: [
           RestaurantOrdersListPage(),
           RestaurantCategoriesCreatePage(),
-          DeliveryOrdersListPage(),
+          RestaurantProductsCreatePage(),
           ClientProfileInfoPage(),
         ],
       ))
