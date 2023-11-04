@@ -27,6 +27,15 @@ class Product {
         this.quantity,
     });
 
+    static List<Product> fromJsonList (List<dynamic> jsonList) {
+      List<Product> toList = [];
+      jsonList.forEach((item) { 
+        Product product = Product.fromJson(item);
+        toList.add(product);
+      });
+      return toList;
+    }
+
     factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
         name: json["name"],

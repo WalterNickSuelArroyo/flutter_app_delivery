@@ -7,7 +7,7 @@ import 'package:flutter_app_delivery/src/utils/custom_animated_bottom_bar.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class ClientHomePage extends StatelessWidget {
+class ClientHomePage extends StatelessWidget { 
   ClientHomeController con = Get.put(ClientHomeController());
 
   @override
